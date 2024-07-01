@@ -1,13 +1,18 @@
-object Practical3_2 {
-  def filterStringsByLength(strings: List[String]): List[String] = {
-    strings.filter(_.length > 5)
+object practical3_2 {
+  def filterLongStrings(strings: List[String]): List[String] = {
+    strings match {
+      case Nil => Nil
+      case head :: tail =>
+        if (head.length > 5) head :: filterLongStrings(tail)
+        else filterLongStrings(tail)
+    }
   }
 
   def main(args: Array[String]): Unit = {
-    val inputStrings =
-      List("apple", "banana", "cherry", "grape", "kiwi", "orange")
-    val filteredStrings = filterStringsByLength(inputStrings)
-    println(filteredStrings)
-
+    val originalList =
+      List("apple", "banana", "cherry", "date", "elderberry", "fig", "grape")
+    val filteredList = filterLongStrings(originalList)
+    println(s"Original List: $originalList")
+    println(s"Filtered List: $filteredList")
   }
 }
